@@ -8,7 +8,9 @@ const StudentController = {
         // },
         // order: [["createdAt", "DESC"]],
         // limit: 5,
+
       });
+      // console.log(req.user);
 
       res.json({
         data: students,

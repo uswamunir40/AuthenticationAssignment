@@ -6,19 +6,15 @@ const authenticateMiddleware = async (req, res, next) => {
     let token = req.headers.authorization;
     console.log("authorized token is ", token);
 
-    
+
     token = token.replace("Bearer ", "");
     console.log("Replaced Bearer token ", token);
+
     const tokenRecord = await tokenModel.findOne({ where: { token: token } });
     console.log("tokenRecord", tokenRecord);
     if (!tokenRecord) {
         return res.status(401).json({ message: "Unauthorized: Token not found in database" });
     }
-    
-
-
-
-
     try {
         const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
         console.log(decode);
